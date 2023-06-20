@@ -74,25 +74,28 @@ const GameReq = () => {
             };
 
             const URL = "https://foora-go.predevsolutions.com/api/create-game";
-            const response = await axios.post(URL, values, config);
-            const responseData = response.data;
+            const response = await axios.post(URL, values, config).then((res => {
+                const responseData = res.data;
 
-            setMessage(responseData.message);
-            console.log(message);
-            console.log(responseData);
+                setMessage(responseData.message);
+                console.log(message);
+                console.log(responseData);
 
-            if (responseData.success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    },
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+                if (responseData.success == true) {
+                    window.location.reload()
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload();
+                        },
+                    });
+                } else {
+                    toast.error(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                }
+            }));
+
         } catch (error) {
             console.error(error);
         }

@@ -44,9 +44,11 @@ const JoindedList = () => {
             data: data
         };
 
-        axios(config)
+        const response = axios(config)
             .then(response => {
-                if (response.data.success) {
+                window.location.reload()
+                setMessage(response.data.message)
+                if (response.success) {
                     toast.success(message, {
                         position: toast.POSITION.TOP_RIGHT,
                         onClose: () => {
@@ -56,6 +58,9 @@ const JoindedList = () => {
                 } else {
                     toast.error(message, {
                         position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload();
+                        },
                     });
                 }
             })
@@ -79,9 +84,11 @@ const JoindedList = () => {
             data: data
         };
 
-        axios(config)
+        const response = axios(config)
             .then(response => {
-                if (response.data.success) {
+                window.location.reload()
+                setMessage(response.data.message)
+                if (response.success) {
                     toast.success(message, {
                         position: toast.POSITION.TOP_RIGHT,
                         onClose: () => {
@@ -104,6 +111,7 @@ const JoindedList = () => {
 
     return (
         <div className="col-md-10 col-lg-8 col-xl-6	">
+            <ToastContainer />
 
             <div className="card mb-3">
                 <div className="card-body p-4 my-2">
@@ -151,7 +159,6 @@ const JoindedList = () => {
                         </div>
 
                     ))}
-                    <ToastContainer />
 
                 </div>
             </div>

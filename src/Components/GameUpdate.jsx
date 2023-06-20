@@ -8,30 +8,30 @@ const GameUpdate = () => {
     const [message, setMessage] = useState()
     const validationSchema = Yup.object().shape(
         {
-            city_id: Yup.number().required('City is required'),
-            area_id: Yup.number().required('Area is required'),
-            name: Yup.string().required('Stadium name is required'),
-            phone: Yup.string().required('phone number is required').matches(/^\d+$/, 'Phone number must contain only numbers').min(11, 'Phone number must be at least 11 digits long'),
-            location_url: Yup.string().required('Location URL is required'),
-            players_number: Yup.number().required('Number of players is required').min(1, 'Number of players must be more than 0').max(5, 'Number of players must be less than or = 5'),
-            price: Yup.number().required('Price is required'),
-            date: Yup.date().required('Date is required'),
-            time: Yup.string().required('Time is required'),
-            gameType: Yup.number().required('Game type is required')
+            city_id: Yup.number(),
+            area_id: Yup.number(),
+            name: Yup.string(),
+            phone: Yup.string().matches(/^\d+$/, 'Phone number must contain only numbers').min(11, 'Phone number must be at least 11 digits long'),
+            location_url: Yup.string(),
+            players_number: Yup.number().min(1, 'Number of players must be more than 0').max(5, 'Number of players must be less than or = 5'),
+            price: Yup.number(),
+            date: Yup.date(),
+            time: Yup.string(),
+            gameType: Yup.number()
         }
     );
 
     const formik = useFormik({
         initialValues: {
-            city_id: 0,
-            area_id: 0,
-            name: '',
-            phone: '',
-            location_url: '',
-            players_number: '',
-            price: '',
-            date: '',
-            time: '',
+            city_id: localStorage.getItem("gamecity"),
+            area_id: localStorage.getItem("gameArea"),
+            name: localStorage.getItem("venue_name"),
+            phone: localStorage.getItem("phone"),
+            location_url: localStorage.getItem("gameLocation"),
+            players_number: localStorage.getItem("playersNumber"),
+            price: localStorage.getItem("gamePrice"),
+            date: localStorage.getItem("gameDate"),
+            time: localStorage.getItem("gameTime"),
             user_id: localStorage.getItem('UserId'),
         },
         validationSchema: validationSchema,
@@ -52,10 +52,11 @@ const GameUpdate = () => {
         const URL = `https://foora-go.predevsolutions.com/api/update-game/${localStorage.getItem('createdGameID')}`
         axios.put(URL, values, config)
             .then(response => {
+                window.location.reload()
                 setMessage(response.data.message);
                 console.log(message)
                 console.log(response.data)
-                if (response.data.success == true) {
+                if (response.success) {
                     toast.success(message, {
                         position: toast.POSITION.TOP_RIGHT,
                         onClose: () => {
@@ -238,17 +239,35 @@ const GameUpdate = () => {
                     <div className="gameTypeBox radioBox d-flex justify-content-center bg-transparent">
                         <label className="h4 fw-bolder">Game Type</label>
                         <p className="text-muted">Please Select Game Type</p>
-                        <div className='GameRadioBox'>
+                        <div className="GameRadioBox">
                             <label className="radio-btn">
-                                <input type="radio" className='normalBtn' name="type" value={formik.values.gameType = 0} onChange={formik.handleChange} />
+                                <input
+                                    type="radio"
+                                    className="normalBtn"
+                                    name="type"
+                                    value="2"
+                                    checked={formik.values.type === 2}
+                                    onChange={() => formik.setFieldValue('type', 2)}
+                                />
                                 <span className="normalSpan radio-btn-label">Normal Game</span>
                             </label>
 
-                            <label className="radio-btn ">
-                                <input type="radio" className='competBtn' name="gameType" value={formik.values.gameType = 1} onChange={formik.handleChange} />
+                            <label className="radio-btn">
+                                <input
+                                    type="radio"
+                                    className="competBtn"
+                                    name="type"
+                                    value="1"
+                                    checked={formik.values.type === 1}
+                                    onChange={() => formik.setFieldValue('type', 1)}
+                                />
                                 <span className="competSpan radio-btn-label">Competitive</span>
                             </label>
                         </div>
+                        {formik.touched.type && formik.errors.type ? (
+                            <div className="errorDiv">{formik.errors.type}</div>
+                        ) : null}
+
                     </div>
                 </div>
                 <div className="modal-footer">

@@ -46,7 +46,7 @@ const Nav = () => {
                     <Link to="/home" className="nav-item text-white nav-link">Home</Link>
                     <Link to="/created-games" className="nav-item text-white nav-link">Games</Link>
                     <Link to="/staduims" className="nav-item text-white nav-link">Stadiums</Link>
-                    <a href="#stars" onClick={showToastMessage} className="nav-item text-white nav-link">Captins</a>
+                    <a href="#stars" className="nav-item text-white nav-link">Captins</a>
                     <a href="#about" className="nav-item text-white nav-link">About</a>
                 </div>
                 <div className="d-flex ms-auto order-5 mx-5">

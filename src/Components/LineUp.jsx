@@ -62,25 +62,31 @@ const LineUp = () => {
         };
 
         try {
-            const response = await axios.post(url, data, { headers });
+            const response = await axios.post(url, data, { headers }).then((res) => {
+                window.location.reload()
+                setMessage(res.message);
+
+
+                if (res.success) {
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload()
+                        }
+                    });
+                } else {
+                    toast.error(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                }
+            }
+            );
             const responseData = response.data;
 
-            setMessage(responseData.message);
             console.log(message);
             console.log(responseData);
 
-            if (responseData.success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload()
-                    }
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+
 
             console.log(responseData);
             // Handle the response as needed

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Footer from './Footer'
 import axios from 'axios';
 import Nav from './Nav';
-import stadImg from "../imags/kora2.jpg"
+import stadImg from "../imags/kora2.jpg";
 import ShareButton from './Share';
 import QRCodeGenerator from './QRCcode';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 const GameInfo = () => {
     const [message, setMessage] = useState();
 
-    const x = "https://documenter.getpostman.com/view/25898006/2s93sgXqtC#02508db3-7800-4e42-8960-e68be02f2217"
     const joinGame = async () => {
         try {
             const data = {
@@ -29,25 +28,24 @@ const GameInfo = () => {
                 data: data,
             };
 
-            const response = await axios(config);
-            const responseData = response.data;
+            const response = await axios(config).then(res => {
+                setMessage(res.data.message);
+                window.location.reload()
+                if (res.success == true) {
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload();
+                        },
+                    });
+                } else {
+                    toast.error(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                }
+            });
 
-            setMessage(responseData.message);
-            console.log(message);
-            console.log(responseData);
 
-            if (responseData.success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    },
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
         } catch (error) {
             console.log(error);
         }

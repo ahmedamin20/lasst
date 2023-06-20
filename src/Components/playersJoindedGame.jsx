@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 const PlayersJoindedGame = () => {
     const token = localStorage.getItem("token")
     const [message, setMessage] = useState();
@@ -11,11 +12,26 @@ const PlayersJoindedGame = () => {
                 user_id: userid
             };
 
-            const response = await axios.post('https://foora-go.predevsolutions.com/api/cancel-join', data).then(response => {
-                setMessage(response.data.message);
-            }).then(setTimeout(() => {
-                setMessage(null);
-            }, 2000));
+            const response = await axios.post('https://foora-go.predevsolutions.com/api/cancel-join', data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }).then(res => {
+                // window.location.reload()
+                setMessage(res.data.message);
+                if (res.data.success) {
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload()
+                        }
+                    });
+                } else {
+                    toast.error(message, {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                }
+            });
             console.log(JSON.stringify(response.data));
         } catch (error) {
             console.log(error);
@@ -37,17 +53,14 @@ const PlayersJoindedGame = () => {
         };
 
         fetchData();
-    }, []);;
-
+    }, []);
+    // console.log(player[0].player)
     return (
         <div className="row">
-            {message && (
-                <div className="alert alert-secondary" style={{ position: "absolute", transition: "all.5s" }} role="alert">
-                    {message}
-                </div>
-            )}
+            <ToastContainer />
+
             {
-                player && player.map((item) => (
+                player && player.map((item, index) => (
                     <div className="row" key={item.id}>
 
                         <div
@@ -75,17 +88,21 @@ const PlayersJoindedGame = () => {
                                 </p>
                                 <p>
                                     <i className="bx bxs-user" style={{ color: "#0a1429" }} />{" "}
-                                    <span>2</span> <span>/</span> <span>{item.players_number}</span>{" "}
+                                    <span>{localStorage.getItem("JoindedplayersNumber")}</span> <span>/</span> <span>{item.players_number}</span>{" "}
                                     <span>Players</span>
                                 </p>
                                 <div className="my-3">
                                     <a
+                                        key={item.id}
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#cancel-joined-request"
                                         data-bs-whatever=""
                                         className="btn btn-danger mx-2"
-                                        onClick={() => handleClick(item.player.id, item.id)}
+                                        onClick={() => {
+                                            handleClick(item.player.id, item.id)
+                                            console.log(item.player.id + " | " + item.id)
+                                        }}
                                     >
                                         Cancel Request
                                     </a>

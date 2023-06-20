@@ -12,32 +12,35 @@ const GetCreatedGames = () => {
     useEffect(() => {
         fetchGames();
     }, []);
-    const handleCancelDelete = async () => {
+
+    const handleCancelDelete = async (x) => {
         try {
             const token = localStorage.getItem('token');
-            const createdGameID = localStorage.getItem('createdGameID');
+            // const createdGameID = localStorage.getItem('createdGameID');
 
-            const response = await axios.delete(`https://foora-go.predevsolutions.com/api/delete-game/${createdGameID}`, {
+            const response = await axios.delete(`https://foora-go.predevsolutions.com/api/delete-game/${x}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
+            }).then(res => {
+                window.location.reload()
+                setMessage(res.data.message);
+                if (res.data.success) {
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        onClose: () => {
+                            window.location.reload()
+                        }
+                    });
+                } else {
+                    toast.error(message, {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                }
             });
 
-            const { success, message } = response.data;
 
-            setMessage(message);
-            if (success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload()
-                    }
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-            }
+
         } catch (error) {
             console.error('Error deleting game:', error);
         }
@@ -101,7 +104,7 @@ const GetCreatedGames = () => {
                             </p>
                             <p>
                                 <i className="bx bxs-user" style={{ color: "#0a1429" }} />{" "}
-                                <span>2</span> <span>/</span>{" "}
+                                <span>{game.joined_players_count}</span> <span>/</span>{" "}
                                 <span>{game.players_number}</span>{" "}
                                 <span>Players</span>
                             </p>
@@ -132,6 +135,7 @@ const GetCreatedGames = () => {
                                     Edit Request
                                 </a>
                                 <a
+                                    key={game.id}
                                     href="#"
                                     data-bs-toggle="modal"
                                     data-bs-target="#cancel-request"
@@ -139,7 +143,7 @@ const GetCreatedGames = () => {
                                     className="btn btn-danger mx-auto"
                                     onClick={() => {
                                         localStorage.setItem('createdGameID', game.id)
-                                        handleCancelDelete()
+                                        handleCancelDelete(localStorage.getItem('createdGameID'))
                                     }
                                     }
                                 >
@@ -150,6 +154,7 @@ const GetCreatedGames = () => {
                                     className="btn btn-success my-2"
                                     style={{ transform: "translateX(80%)" }}
                                     to="/games"
+                                    key={game.id}
                                     onClick={() => {
                                         localStorage.setItem('createdGameID', game.id)
                                         localStorage.setItem("gamePrice", game.price)

@@ -62,7 +62,6 @@ const LineUpShow = () => {
             <header>
                 <i className="fa fa-futbol-o" style={{ fontSize: 22 }} />
             </header>
-            <ToastContainer />
 
             <main>
                 <div className="pitch">
