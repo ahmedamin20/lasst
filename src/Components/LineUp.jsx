@@ -32,20 +32,20 @@ const LineUp = () => {
             accepted_players = games[i].accepted_players
         }
     }
+    console.log()
+    // playerID
+    let accepted_playersId = [];
+    for (let x = 0; x < accepted_players.length; x++) {
+        accepted_playersId.push(accepted_players[x].data.id)
+    }
     // accepted_players
+
     let accepted_playersNames = [];
     let accepted_playersImg = [];
     for (let x = 0; x < accepted_players.length; x++) {
         accepted_playersNames.push(accepted_players[x].data.name)
         accepted_playersImg.push(accepted_players[x].data.image)
     }
-    // playerID
-    let accepted_playersId = [];
-    for (let x = 0; x < accepted_players.length; x++) {
-        accepted_playersId.push(accepted_players[x].data.id)
-    }
-
-
     //-----remove player--------\\
     const cancelJoin = async (x) => {
         const url = 'https://foora-go.predevsolutions.com/api/cancel-join';
@@ -62,39 +62,33 @@ const LineUp = () => {
         };
 
         try {
-            const response = await axios.post(url, data, { headers }).then((res) => {
-                window.location.reload()
-                setMessage(res.message);
-
-
-                if (res.success) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload()
-                        }
-                    });
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                    });
-                }
-            }
-            );
+            const response = await axios.post(url, data, { headers });
             const responseData = response.data;
+            setMessage(responseData.message);
+
+            window.location.reload();
+
+            if (responseData.success) {
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    onClose: () => {
+                        window.location.reload();
+                    },
+                });
+            } else {
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
 
             console.log(message);
             console.log(responseData);
-
-
-
-            console.log(responseData);
-            // Handle the response as needed
         } catch (error) {
             console.error('Request failed:', error.message);
             // Handle the error
         }
     };
+
 
 
     return (

@@ -49,10 +49,10 @@ const Nav = () => {
                     <a href="#stars" className="nav-item text-white nav-link">Captins</a>
                     <a href="#about" className="nav-item text-white nav-link">About</a>
                 </div>
-                <div className="d-flex ms-auto order-5 mx-5">
-                    <div className="dropdown">
+                <div className="profileContainer d-flex ms-auto order-5 mx-5">
+                    <div className="dropdown p-2">
                         <a
-                            className="me-4 dropdown-toggle hidden-arrow"
+                            className="m-2 dropdown-toggle hidden-arrow"
                             href="#"
                             id="navbarDropdownMenuLink"
                             role="button"
@@ -78,9 +78,9 @@ const Nav = () => {
                         </ul>
                     </div>
 
-                    <div className="dropdown">
+                    <div className="dropdown p-2">
                         <a
-                            className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                            className=" dropdown-toggle d-flex align-items-center hidden-arrow"
                             id="navbarDropdownMenuAvatar"
                             role="button"
                             data-mdb-toggle="dropdown"

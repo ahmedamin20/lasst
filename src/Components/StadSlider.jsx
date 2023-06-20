@@ -42,8 +42,7 @@ const StadSlider = () => {
             spaceBetween={50}
             slidesPerView={3}
             loop={true}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
+
         >
             {SearchResults && SearchResults.map((item) => (
                 <SwiperSlide key={item.id}>

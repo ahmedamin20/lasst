@@ -145,60 +145,14 @@ const Slider = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="profileRate">
-        <div className="thumbWrapperProfile thumb-wrapper">
-          <div className="img-box">
-            <img src={profileImg} className="profileRateImg rounded-circle" alt="" />
-          </div>
-          <div className="thumb-content">
-            <h4>Mutasim Yasser</h4>
-            <div className="stars">
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i
-                className="bx bxs-star-half"
-                style={{ color: "#ff9800" }}
-              ></i>
-            </div>
-            <p>
-              <i
-                className="bx bxs-star-half"
-                style={{ color: "#ff9800" }}
-              ></i>
-              9.0
-            </p>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="profileRate">
-        <div className="thumbWrapperProfile thumb-wrapper">
-          <div className="img-box">
-            <img src={profileImg} className="profileRateImg rounded-circle" alt="" />
-          </div>
-          <div className="thumb-content">
-            <h4>Mutasim Yasser</h4>
-            <div className="stars">
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i className="bx bxs-star" style={{ color: "#ff9800" }}></i>
-              <i
-                className="bx bxs-star-half"
-                style={{ color: "#ff9800" }}
-              ></i>
-            </div>
-            <p>
-              <i
-                className="bx bxs-star-half"
-                style={{ color: "#ff9800" }}
-              ></i>
-              9.0
-            </p>
-          </div>
-        </div>
-      </SwiperSlide>
+
+
+
+
+
+
+
+
     </Swiper>
   );
 };

@@ -97,12 +97,11 @@ nav {
   }
   .swiper-slide.profileRate {
     /* background-color: red; */
-    width: 80% !important;
-    margin: 0;
+    width: 95% !important;
   }
   .swiper-slide .thumbWrapperProfile {
     width: 100% !important;
-    margin: 0 auto;
+    margin: 0 auto !important;
   }
   .welcome-img {
     height: 100vh;
@@ -129,6 +128,12 @@ nav {
   }
   .owl-first-item {
     top: -12rem;
+  }
+  .profileContainer {
+    width: 25% !important;
+    justify-content: space-evenly;
+    flex-flow: end;
+    transform: translateX(20%);
   }
 }
 
@@ -244,7 +249,8 @@ nav ul li a {
     flex-direction: column;
   }
   .lets-form {
-    left: 0rem !important;
+    left: 0 !important;
+    right: 0 !important;
   }
   .welcome-img {
     height: 100vh;
@@ -406,25 +412,6 @@ nav ul li a {
   .swiper-slide {
     width: 100% !important;
   }
-  /* .header-welcome .owl-welcome-item {
-    position: fixed;
-    min-height: 100vh;
-  }
-  .header-welcome {
-    min-height: 100vh;
-  }
-  .header-welcome .owl-welcome-item img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .header-welcome .owl-welcome-item p {
-    font-size: 14px !important;
-    font-weight: 400 !important;
-  } */
-
   .header-welcome .owl-welcome-item h1 {
     font-size: 30px;
     font-weight: 600;

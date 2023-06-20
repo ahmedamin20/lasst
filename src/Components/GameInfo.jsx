@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
-import Footer from './Footer'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Nav from './Nav';
-import stadImg from "../imags/kora2.jpg";
+import Footer from './Footer';
 import ShareButton from './Share';
 import QRCodeGenerator from './QRCcode';
-import { ToastContainer, toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+
+import stadImg from '../imags/kora2.jpg';
+
 const GameInfo = () => {
-    const [message, setMessage] = useState();
+    const [message, setMessage] = useState('');
 
     const joinGame = async () => {
         try {
-            const data = {
-                game_id: localStorage.getItem('game_id'),
-            };
-
+            const game_id = localStorage.getItem('game_id');
             const token = localStorage.getItem('token');
 
             const config = {
@@ -25,27 +26,25 @@ const GameInfo = () => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-                data: data,
+                data: { game_id },
             };
 
-            const response = await axios(config).then(res => {
-                setMessage(res.data.message);
-                window.location.reload()
-                if (res.success == true) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        },
-                    });
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                    });
-                }
-            });
+            const response = await axios(config);
 
-
+            if (response.data.success) {
+                setMessage(response.data.message);
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    onClose: () => {
+                        window.location.reload();
+                    },
+                });
+            } else {
+                setMessage(response.data.message);
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
         } catch (error) {
             console.log(error);
         }
@@ -69,23 +68,29 @@ const GameInfo = () => {
                         <div className="col-md-4">
                             <div className="basic-info">
                                 <h5 className="fw-bolder my-3">{localStorage.getItem('venue_name')}</h5>
-                                <h6>{localStorage.getItem('game_city')} | {localStorage.getItem('game_area')}</h6>
+                                <h6>
+                                    {localStorage.getItem('game_city')} | {localStorage.getItem('game_area')}
+                                </h6>
                                 <p>
-                                    <i className="bx bxs-user" style={{ color: "#0a1429" }} />{" "}
-                                    <span>{localStorage.getItem("joined_players_count")}</span> <span>/</span> <span>{localStorage.getItem('players_number')}</span> <span>Players</span>
+                                    <i className="bx bxs-user" style={{ color: '#0a1429' }} />{' '}
+                                    <span>
+                                        {localStorage.getItem('joined_players_count')}
+                                    </span>{' '}
+                                    /{' '}
+                                    <span>{localStorage.getItem('players_number')}</span>{' '}
+                                    <span>Players</span>
                                 </p>
                                 <span className="game-info-span">
-                                    <i className="bx bxs-watch" style={{ color: "#0a1429" }} />
+                                    <i className="bx bxs-watch" style={{ color: '#0a1429' }} />
                                     {localStorage.getItem('game_time')}
                                 </span>
                                 <p>
-                                    <a href={`${localStorage.getItem("location")}`}>
-                                        < i className="bx bx-map" undefined="" />
-                                        Open on maps
+                                    <a href={localStorage.getItem('location')}>
+                                        <i className="bx bx-map" /> Open on maps
                                     </a>
                                 </p>
                                 <div className="contacts">
-                                    <h5>Contacts :</h5>
+                                    <h5>Contacts:</h5>
                                     <li>
                                         <i className="bx bxs-phone" />
                                         {localStorage.getItem('phone')}
@@ -93,7 +98,7 @@ const GameInfo = () => {
                                     <li>
                                         <i
                                             className="bx bxs-dollar-circle"
-                                            style={{ color: "#32aa37" }}
+                                            style={{ color: '#32aa37' }}
                                         />
                                         {localStorage.getItem('game_price')}
                                     </li>
@@ -105,7 +110,9 @@ const GameInfo = () => {
                                         <i className="bx bx-id-card" />
                                         {localStorage.getItem('username')}
                                     </li>
-                                    <QRCodeGenerator data={`https://foora-go.predevsolutions.com/api/get-specific-game/${localStorage.getItem("game_id")}`} />
+                                    <QRCodeGenerator
+                                        data={`https://foora-go.predevsolutions.com/api/get-specific-game/${localStorage.getItem('game_id')}`}
+                                    />
                                 </div>
                             </div>
                             <button
@@ -117,28 +124,20 @@ const GameInfo = () => {
                             </button>
                             <Link
                                 to="/lineupshow"
-
                                 className="btn btn-warning text-white btn-lg d-grid gap-2 col-6 my-5"
-                                onClick={joinGame}
                             >
                                 View Line up
                             </Link>
 
                             <ShareButton />
-                            {/* {message && (
-                                <div className="alert alert-secondary p-absolute my-3" role="alert">
-                                    {message}
-                                </div>
-                            )} */}
                             <ToastContainer />
-
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
             <Footer />
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default GameInfo
+export default GameInfo;
