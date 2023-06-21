@@ -32,7 +32,7 @@ const Nav = () => {
     return (
 
         <nav className="navbar navbar-expand-lg navbar-light shadow sticky-top p-0" >
-            <Link to={'/home'} className="navbar-brand d-flex align-items-center text-center py-0 px-4 ">
+            <Link to="/Home" className="navbar-brand d-flex align-items-center text-center py-0 px-4 ">
                 <h1 h1 className="m-0">
                     <img src={logo} className="logo src" alt="" />FORRA</h1>
             </Link>
@@ -43,7 +43,7 @@ const Nav = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <div className="navbar-nav ms-4 p-4 p-lg-1">
-                    <Link to="/home" className="nav-item text-white nav-link">Home</Link>
+                    <Link to="/Home" className="nav-item text-white nav-link">Home</Link>
                     <Link to="/created-games" className="nav-item text-white nav-link">Games</Link>
                     <Link to="/staduims" className="nav-item text-white nav-link">Stadiums</Link>
                     <a href="#stars" className="nav-item text-white nav-link">Captins</a>

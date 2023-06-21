@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [message, setMessage] = useState();
+  const [profileData, setProfileData] = useState(null);
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -27,7 +28,6 @@ const Login = () => {
   });
 
   const handleSubmit = async (values) => {
-
     try {
       const formData = new FormData();
       formData.append('email', values.email);
@@ -37,20 +37,91 @@ const Login = () => {
           'Content-Type': 'application/json'
         }
       };
-      const response = await axios.post('https://foora-go.predevsolutions.com/api/player/login', formData, config)
-        .then(response => {
-          localStorage.setItem('token', response.data.data.token)
-          navigate('/home')
-          window.location.reload();
-        })
-
-
-      localStorage.setItem('token', response.data.data.token)
-
+      const response = await axios.post('https://foora-go.predevsolutions.com/api/player/login', formData, config);
+      
+      // Store the token in local storage
+      localStorage.setItem('token', response.data.data.token);
+      
+      // Fetch profile data after successful login
+      fetchProfileData();
     } catch (error) {
       console.error(error);
     }
   };
+
+  const fetchProfileData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      // Make sure the token exists before making the API call
+      if (token) {
+        const response = await axios.get(
+          'https://foora-go.predevsolutions.com/api/profile',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data"
+            }
+          }
+        );
+        const profileRes = response.data.data;
+
+        // Store profile data in local storage
+        localStorage.setItem('username', profileRes.name);
+        localStorage.setItem('userage', profileRes.age);
+        localStorage.setItem('userweight', profileRes.weight);
+        localStorage.setItem('userimg', profileRes.image);
+        localStorage.setItem('userheight', profileRes.height);
+        localStorage.setItem('usercity', profileRes.city);
+        localStorage.setItem('userarea', profileRes.area);
+
+        if (profileRes.city === "Cairo") {
+          localStorage.setItem("userCityId", 1);
+        } else if (profileRes.city === "Giza") {
+          localStorage.setItem("userCityId", 3);
+        } else if (profileRes.city === "Alexandria") {
+          localStorage.setItem("userCityId", 2);
+        } else {
+          console.log("userCityError");
+        }
+
+        if (profileRes.area === "Masr El Gedida") {
+          localStorage.setItem("userAreaId", 2);
+        } else if (profileRes.area === "El Zaytoun") {
+          localStorage.setItem("userAreaId", 3);
+        } else if (profileRes.area === "Ain Shams") {
+          localStorage.setItem("userAreaId", 1);
+        } else {
+          console.log("userAreaError");
+        }
+
+        localStorage.setItem('email', profileRes.email);
+        localStorage.setItem('phone', profileRes.phone);
+        localStorage.setItem('userimg', profileRes.image);
+
+        setProfileData(profileRes);
+        
+        // Navigate to home page
+        navigate("/Home");
+        
+        // Reload the page (optional)
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    if (localStorage.getItem("token")) {
+      fetchProfileData();
+    }
+  }, []);
+
+
+
+
 
   return (
     <>

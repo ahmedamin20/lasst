@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import PopupMessage from './PopupMessage';
 import { ToastContainer, toast } from 'react-toastify';
 const GameUpdate = () => {
     const [message, setMessage] = useState()
@@ -113,10 +112,8 @@ const GameUpdate = () => {
 
             <form className="row ms-4" onSubmit={formik.handleSubmit}>
                 <div className="modal-body">
-                    <PopupMessage message={"message"} />
                     <div className="tab-content p-4 p-md-5" id="v-pills-tabContent">
                         <div className="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-
                             <div className="row justify-content-center">
                                 <div className="col-md-6">
                                     <div className="form-group text-center">
