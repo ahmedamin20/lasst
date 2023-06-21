@@ -66,23 +66,8 @@ const LineUp = () => {
             const responseData = response.data;
             setMessage(responseData.message);
 
-            window.location.reload();
-
-            if (responseData.success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    },
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
-
-            console.log(message);
-            console.log(responseData);
+            toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER });
+            window.location.reload()
         } catch (error) {
             console.error('Request failed:', error.message);
             // Handle the error
@@ -96,7 +81,6 @@ const LineUp = () => {
             <header>
                 <i className="fa fa-futbol-o" style={{ fontSize: 22 }} />
             </header>
-            <ToastContainer />
 
             <main>
                 <div className="pitch">

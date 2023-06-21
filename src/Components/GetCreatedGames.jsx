@@ -22,24 +22,11 @@ const GetCreatedGames = () => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            }).then(res => {
+            })
+
+            toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER }).then(
                 window.location.reload()
-                setMessage(res.data.message);
-                if (res.data.success) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload()
-                        }
-                    });
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                }
-            });
-
-
+            )
 
         } catch (error) {
             console.error('Error deleting game:', error);

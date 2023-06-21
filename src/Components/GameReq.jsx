@@ -39,11 +39,7 @@ const GameReq = () => {
         fetchData();
     }, []);
 
-    const showToastMessageSucc = () => {
-        toast.success('Success Notification !', {
-            position: toast.POSITION.TOP_RIGHT
-        });
-    };
+
     const formik = useFormik({
         initialValues: {
             city_id: null,
@@ -77,23 +73,9 @@ const GameReq = () => {
             const response = await axios.post(URL, values, config).then((res => {
                 const responseData = res.data;
 
-                setMessage(responseData.message);
-                console.log(message);
-                console.log(responseData);
 
-                if (responseData.success == true) {
-                    window.location.reload()
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        },
-                    });
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                    });
-                }
+
+                toast.success(responseData.message, { position: toast.POSITION.TOP_CENTER }).then(window.location.reload);
             }));
 
         } catch (error) {
@@ -172,8 +154,8 @@ const GameReq = () => {
                         sessionStorage.setItem("searchCity", citySelected);
                         sessionStorage.setItem("searchArea", formik.values.area_id);
 
-                    }} type="submit" className="search-button px-2 mx-0"><i class='bx bx-search-alt ms-auto py-2' /></Link>
-                    <button type="button" class="main-btn rounded-2 mx-2 mb-2" data-bs-toggle="modal" data-bs-target="#lets"
+                    }} type="submit" className="search-button px-2 mx-0"><i className='bx bx-search-alt ms-auto py-2' /></Link>
+                    <button type="button" className="main-btn rounded-2 mx-2 mb-2" data-bs-toggle="modal" data-bs-target="#lets"
                         data-bs-whatever="">Let's Create A Game</button>
                 </div>
                 <div className="modal fade" id="lets" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

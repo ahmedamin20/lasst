@@ -107,20 +107,9 @@ const SignUp = () => {
             localStorage.setItem("token", response.data.data.token);
 
             if (response.data.success == true) {
-                setMessage(response.data.message);
-                console.log(message);
-                console.log(response.data);
                 handleFileUpload(selectedFile);
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    // onClose: () => {
-                    //     navigate("./login")
-                    // }
-                })
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
+                toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER })
+                navigate("/")
             }
         } catch (error) {
             console.error(error);

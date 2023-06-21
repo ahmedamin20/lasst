@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +12,6 @@ import QRCodeGenerator from './QRCcode';
 import stadImg from '../imags/kora2.jpg';
 
 const GameInfo = () => {
-    const [message, setMessage] = useState('');
 
     const joinGame = async () => {
         try {
@@ -31,20 +30,7 @@ const GameInfo = () => {
 
             const response = await axios(config);
 
-            if (response.data.success) {
-                setMessage(response.data.message);
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    },
-                });
-            } else {
-                setMessage(response.data.message);
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+            toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER })
         } catch (error) {
             console.log(error);
         }

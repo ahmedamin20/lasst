@@ -38,21 +38,23 @@ const Login = () => {
         }
       };
       const response = await axios.post('https://foora-go.predevsolutions.com/api/player/login', formData, config);
-      
+
       // Store the token in local storage
       localStorage.setItem('token', response.data.data.token);
-      
+      toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER });
+      console.log(response)
       // Fetch profile data after successful login
       fetchProfileData();
     } catch (error) {
       console.error(error);
+      toast.error("Wrong password", { position: toast.POSITION.TOP_CENTER });
     }
   };
 
   const fetchProfileData = async () => {
     try {
       const token = localStorage.getItem('token');
-      
+
       // Make sure the token exists before making the API call
       if (token) {
         const response = await axios.get(
@@ -100,10 +102,10 @@ const Login = () => {
         localStorage.setItem('userimg', profileRes.image);
 
         setProfileData(profileRes);
-        
+
         // Navigate to home page
         navigate("/Home");
-        
+
         // Reload the page (optional)
         window.location.reload();
       }

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const JoindedList = () => {
     const [joins, setJoins] = useState([]);
-    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const apiUrl = 'https://foora-go.predevsolutions.com/api/get-all-joins';
@@ -32,22 +31,8 @@ const JoindedList = () => {
 
         axios.post('https://foora-go.predevsolutions.com/api/game/join/change-status', data)
             .then(response => {
-                setMessage(response.data.message);
-                if (response.data.success) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        },
-                    });
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        },
-                    });
-                }
+                toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER })
+                window.location.reload();
             })
             .catch(error => {
                 console.error(error);
@@ -56,7 +41,6 @@ const JoindedList = () => {
 
     return (
         <div className="col-md-10 col-lg-8 col-xl-6">
-            <ToastContainer />
 
             <div className="card mb-3">
                 <div className="card-body p-4 my-2">

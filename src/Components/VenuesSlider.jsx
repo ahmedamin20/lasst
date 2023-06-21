@@ -52,9 +52,9 @@ const VenuesSlider = () => {
                         <div className="thumb-content">
                             <h4>{item.venue_name}</h4>
                             <h4>{item.date}</h4>
-                            <p><span>{item.area}</span> <span>|</span> <span>Cairo</span></p>
+                            <p><span>{item.area}</span> <span>|</span> <span>{item.city}</span></p>
                             <h4><i className='bx bxs-watch' style={{ color: '#0a1429' }} ></i> {item.time}</h4>
-                            <h4><i className='bx bxs-user' style={{ color: '#0a1429' }} ></i> <span>2</span> <span>/</span> <span>{item.players_number}</span> <span>Players</span></h4>
+                            <h4><i className='bx bxs-user' style={{ color: '#0a1429' }} ></i> <span>{item.joined_players_count}</span> <span>/</span> <span>{item.players_number}</span> <span>Players</span></h4>
                             <p><i className='bx bxs-dollar-circle' style={{ color: '#32aa37' }}  ></i> {item.price}</p>
                             <Link to='/gameInfo' className="btn btn-outline-warning fw-bolder mt-3" onClick={() => {
                                 localStorage.setItem('venue_name', item.venue_name)

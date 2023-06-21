@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Nav from './Nav'
 import axios from 'axios'
-import GameUpdate from './GameUpdate';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Footer from './Footer';
@@ -63,30 +62,10 @@ const User = () => {
 
             const response = await axios(config);
             const responseData = response.data;
-
+            toast.success(responseData.message, { position: toast.POSITION.TOP_CENTER }).then(
+                window.location.reload()
+            )
             console.log(JSON.stringify(responseData));
-
-            if (responseData.success) {
-                toast.success(responseData.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    }
-                });
-
-                localStorage.setItem('username', values.name);
-                localStorage.setItem('userheight', values.height);
-                localStorage.setItem('email', values.email);
-                localStorage.setItem('userweight', values.weight);
-                localStorage.setItem('userage', values.age);
-                localStorage.setItem('phone', values.phone);
-                localStorage.removeItem('age');
-            } else {
-                toast.error(responseData.message, {
-                    position: toast.POSITION.TOP_RIGHT,
-
-                });
-            }
         } catch (error) {
             console.log(error);
         }
@@ -117,31 +96,15 @@ const User = () => {
 
             .then(data => {
                 // Handle the response from the API
-
                 // Assuming the API response contains the image URL
                 const uploadedImageUrl = data.image_url;
-
                 // Update the state with the uploaded image URL
                 setImageUrl(uploadedImageUrl);
-
                 // Store the image URL in localStorage
                 localStorage.setItem('userimg', uploadedImageUrl);
-            }).then(response => {
-                setMessage(response.data.message);
-                console.log(message)
-                console.log(response.data)
-                if (response.data.success == true) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        }
-                    })
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                }
+                toast.success(data.message, { position: toast.POSITION.TOP_CENTER }).then(
+                    window.location.reload()
+                )
             })
             .catch(error => {
                 // Handle any errors
@@ -509,7 +472,7 @@ const User = () => {
                                     tabIndex={-1}
                                     aria-hidden="true"
                                 >
-                                    <div className="modal-dialog modal-dialog-centered">
+                                    {/* <div className="modal-dialog modal-dialog-centered">
                                         <div className="modal-content">
                                             <div className="modal-header">
                                                 <h5 className="modal-title">Cancel Request</h5>
@@ -537,7 +500,7 @@ const User = () => {
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div

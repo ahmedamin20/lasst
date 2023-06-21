@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PlayersJoindedGame = () => {
     const token = localStorage.getItem('token');
-    const [message, setMessage] = useState('');
 
     const handleClick = async (userId, gameId) => {
         try {
@@ -24,20 +23,9 @@ const PlayersJoindedGame = () => {
                 }
             );
 
-            setMessage(response.data.message);
-
-            if (response.data.success) {
-                toast.success(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    onClose: () => {
-                        window.location.reload();
-                    },
-                });
-            } else {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            }
+            toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER }).then(
+                window.location.reload()
+            )
 
             console.log(JSON.stringify(response.data));
         } catch (error) {
@@ -70,7 +58,6 @@ const PlayersJoindedGame = () => {
 
     return (
         <div className="row">
-            <ToastContainer />
 
             {player &&
                 player.map((item, index) => (

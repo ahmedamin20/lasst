@@ -52,21 +52,12 @@ const GameUpdate = () => {
         axios.put(URL, values, config)
             .then(response => {
                 window.location.reload()
-                setMessage(response.data.message);
                 console.log(message)
                 console.log(response.data)
-                if (response.success) {
-                    toast.success(message, {
-                        position: toast.POSITION.TOP_RIGHT,
-                        onClose: () => {
-                            window.location.reload();
-                        }
-                    })
-                } else {
-                    toast.error(message, {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                }
+                toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER }).then(
+                    window.location.reload()
+                )
+
             })
             .catch(error => {
                 // Handle errors here
