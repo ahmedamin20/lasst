@@ -7,11 +7,7 @@ import GameReq from "./GameReq";
 import Footer from "./Footer";
 import VenuesSlider from "./VenuesSlider";
 import StadSlider from './StadSlider';
-
 const Home = () => {
-
-
-
     return (
         <>
             <Nav />

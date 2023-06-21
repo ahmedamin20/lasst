@@ -41,7 +41,7 @@ const VenuesSlider = () => {
             spaceBetween={50}
             slidesPerView={3}
             loop={true}
-            onSwiper={(swiper) => console.log(swiper)}
+
         >
             {SearchResults && SearchResults.map((item) => (
                 <SwiperSlide key={item.id}>
@@ -65,6 +65,7 @@ const VenuesSlider = () => {
                                 localStorage.setItem('game_city', item.city)
                                 localStorage.setItem('game_price', item.price)
                                 localStorage.setItem('game_id', item.id)
+                                localStorage.setItem('joined_players_count', item.joined_players_count)
                             }} >
                                 join
                             </Link>
@@ -77,7 +78,7 @@ const VenuesSlider = () => {
 
 
 
-        </Swiper >
+        </Swiper>
 
     )
 }
