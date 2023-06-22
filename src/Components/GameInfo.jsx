@@ -94,7 +94,7 @@ const GameInfo = () => {
                                     </li>
                                     <li>
                                         <i className="bx bx-id-card" />
-                                        {localStorage.getItem('username')}
+                                        {localStorage.getItem('CreatorName')}
                                     </li>
                                     <QRCodeGenerator
                                         data={`https://foora-go.predevsolutions.com/api/get-specific-game/${localStorage.getItem('game_id')}`}

@@ -3,6 +3,8 @@ import '../lineUp.css';
 import { Tooltip } from 'react-tooltip';
 import imgg from "../imags/noImg.png";
 import axios from 'axios';
+import Nav from './Nav';
+import Footer from './Footer';
 
 const LineUpShow = () => {
     const [games, setGames] = useState([]);
@@ -37,7 +39,7 @@ const LineUpShow = () => {
     let accepted_players = [];
     if (games && games.length) {
         for (let i = 0; i < games.length; i++) {
-            if (games[i].id === gameId) {
+            if (games[i].id == gameId) {
                 accepted_players = games[i].accepted_players;
                 break;
             }
@@ -66,8 +68,9 @@ const LineUpShow = () => {
 
     return (
         <div className='lineupBody'>
+            <Nav />
             <header>
-                <i className="fa fa-futbol-o" style={{ fontSize: 22 }} />
+                <h2>Game Lineup</h2>
             </header>
 
             <main>
@@ -127,6 +130,7 @@ const LineUpShow = () => {
                 </div>
                 <main></main>
             </main>
+            <Footer />
         </div>
     );
 };

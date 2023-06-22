@@ -5,16 +5,10 @@ import axios from 'axios';
 import uploadImg from '../imags/upload2.png';
 import { useNavigate } from 'react-router-dom';
 import '../Reg.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 const SignUp = () => {
     const navigate = useNavigate()
     const [selectedFile, setSelectedFile] = useState();
-
-    const [message, setMessage] = useState();
-
-
-
-
     //--------get cities----------\\
     const [cities, setCities] = useState([]);
     useEffect(() => {
@@ -26,7 +20,6 @@ const SignUp = () => {
                 console.log(error);
             }
         };
-
         fetchData();
     }, []);
 
@@ -62,7 +55,6 @@ const SignUp = () => {
         age: Yup.number().positive("must be ve+").required('Age is required'),
         city: Yup.string().required('City is required'),
         area: Yup.string().required('Area is required'),
-
     });
 
     const formik = useFormik({
@@ -116,10 +108,6 @@ const SignUp = () => {
             // Handle error or any other actions
         }
     };
-
-
-
-
     function handleFileUpload(selectedFile) {
         const file = selectedFile;
         const token = localStorage.getItem('token');
@@ -141,19 +129,9 @@ const SignUp = () => {
                 console.error(error);
             });
     }
-
-
-
-
-
-
-
-
     return (
         <div className='containerSignup' style={{ background: "#1f1d2b" }}>
-            <ToastContainer className="p-absolute" />
-
-            <div className='container py-1 px-1'>
+            <div className='container py-1 px-1 '>
                 <div className='row d-flex justify-center align-center'>
                     <div className='main mainReg col'>
                         <div className='card card-registration my-4'>

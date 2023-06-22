@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { MDBCol, MDBContainer, MDBFooter, MDBIcon, MDBRow } from 'mdbreact'
 const Footer = () => {
     return (
-        <MDBFooter className='text-center text-lg-start text-muted' style={{ top: "7vh", position: "relative" }}>
+        <MDBFooter className='text-center text-lg-start text-muted'>
             <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
             </section>
             <section className=''>
@@ -17,24 +17,24 @@ const Footer = () => {
                         <MDBCol md='2' lg='2' xl='2' className='mx-auto mb-4'>
                             <h6 className='text-uppercase fw-bold mb-4'>Pages</h6>
                             <p>
-                                <Link href='#!' className='text-reset'>
+                                <Link to='/Home' className='text-reset'>
                                     Home
                                 </Link>
                             </p>
                             <p>
-                                <Link href='#!' className='text-reset'>
+                                <Link to='/created-games' className='text-reset'>
                                     Game
                                 </Link>
                             </p>
                             <p>
-                                <Link href='#!' className='text-reset'>
+                                <Link to='/staduims' className='text-reset'>
                                     Staduim
                                 </Link>
                             </p>
                             <p>
-                                <a href='#!' className='text-reset'>
+                                <Link href='#!' className='text-reset'>
                                     About
-                                </a>
+                                </Link>
                             </p>
                         </MDBCol>
 

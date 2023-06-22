@@ -76,7 +76,7 @@ const Game = () => {
                                                     <div className="images">
                                                         <div className="img-holder">
                                                             <img
-                                                                src="imags/kora2.jpg"
+                                                                src={img}
                                                                 className="img-fluid"
                                                                 alt=""
                                                             />

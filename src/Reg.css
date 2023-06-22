@@ -2,6 +2,7 @@
 
 .mainReg {
   border-radius: 2rem 0 0 2rem;
+  margin-top: 9rem !important;
 }
 form div div.errorDiv {
   color: rgb(255, 0, 0);
@@ -15,8 +16,15 @@ form div div.errorDiv {
   background-repeat: no-repeat;
   position: relative;
 }
-.containerSginup {
+.containerSignup {
   background-color: #201c2b;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .form-control:hover {
   color: #635589;

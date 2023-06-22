@@ -127,7 +127,6 @@ const Login = () => {
 
   return (
     <>
-
       <form onSubmit={formik.handleSubmit}>
         <div className="wrapper LoginWr">
           <div className="container mainLoginContainer">
@@ -142,13 +141,11 @@ const Login = () => {
               <div className="col-md-6 right">
                 <div className="input-box">
                   <div className="logooo">
-                    <img className="logo" src={logo} style={{ width: 40 }} alt="logo" />
-                    <h5 className="forra">Forra-Go</h5>
+                    {/* <img className="logo" src={logo} style={{ width: 40 }} alt="logo" /> */}
+                    {/* <h5 className="forra">Forra-Go</h5> */}
                   </div>
                   <header className="login-text">Hello Again!</header>
                   <div className="form-floating mb-3">
-                    <ToastContainer />
-
                     <input
                       className="form-control"
                       id="email"
@@ -178,8 +175,8 @@ const Login = () => {
                       <i className="bx bx-lock" /> Password
                     </label>
                   </div>
-                  <input type="checkbox" id="rememberMe" />{" "}
-                  <label className="pb-3">Remember me</label>
+                  {/* <input type="checkbox" id="rememberMe" />{" "}
+                  <label className="pb-3">Remember me</label> */}
                   <div className="login d-grid">
                     <button type='submit' className="btn btn-lg" id="loginBtn">
                       Login

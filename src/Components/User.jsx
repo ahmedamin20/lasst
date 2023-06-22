@@ -102,9 +102,9 @@ const User = () => {
                 setImageUrl(uploadedImageUrl);
                 // Store the image URL in localStorage
                 localStorage.setItem('userimg', uploadedImageUrl);
-                toast.success(data.message, { position: toast.POSITION.TOP_CENTER }).then(
-                    window.location.reload()
-                )
+                // toast.success(data.message, { position: toast.POSITION.TOP_CENTER }).then(
+                //     window.location.reload()
+                // )
             })
             .catch(error => {
                 // Handle any errors

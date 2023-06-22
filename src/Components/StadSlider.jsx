@@ -55,8 +55,15 @@ const StadSlider = () => {
 
                             <h4>{item.name}</h4>
                             <h4>{item.area} | {item.city}</h4>
-                            <p><i className='bx bxs-dollar-circle' style={{ color: '#32aa37' }} ></i> <span>300</span> <span>EGP</span></p>
-                            <Link to="/Staduim" className="btn">Book Now</Link>
+                            <Link to="/Staduim" className="btn" onClick={() => {
+                                localStorage.setItem("stadName", item.name)
+                                localStorage.setItem("stadArea", item.area)
+                                localStorage.setItem("stadCity", item.city)
+                                localStorage.setItem("stadgross_type_text", item.gross_type_text)
+                                localStorage.setItem("stadtype_text", item.type_text)
+                                localStorage.setItem("stadspace", item.space)
+                                localStorage.setItem("stadlocation", item.location)
+                            }}>Book Now</Link>
                         </div>
                     </div>
                 </SwiperSlide>

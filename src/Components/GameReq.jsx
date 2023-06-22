@@ -78,6 +78,7 @@ const GameReq = () => {
                 toast.success(responseData.message, { position: toast.POSITION.TOP_CENTER }).then(window.location.reload);
             }));
 
+
         } catch (error) {
             console.error(error);
         }
@@ -188,7 +189,7 @@ const GameReq = () => {
                                         <div className="row  mb-4">
                                             <div className="col-md-6">
                                                 <div className="col-md-3-inline">
-                                                    <label className="text fw-bolder h4" style={{ fontWeight: "500" }}>Select Your City</label>
+                                                    <label className="text fw-bolder h4" for="city" style={{ fontWeight: "500" }}>Select Your City</label>
                                                     <p className="text-muted">Please select your city</p>
                                                     <select className="form-control" name="city_id"
                                                         onInput={(e) => selectAreas(e.target.value)}
@@ -210,16 +211,15 @@ const GameReq = () => {
                                                 <div className="col-md-3-inline">
                                                     <label className="text fw-bolder h4" style={{ fontWeight: "500" }}>Select Your Area</label>
                                                     <p className="text-muted">Please select your area</p>
-                                                    <select className="form-select" onBlur={formik.handleBlur} name="area_id" value={formik.values.area_id} onChange={formik.handleChange} id="area">
+
+                                                    <select className="form-control" name="area_id"
+                                                        value={formik.values.area_id || 0} onBlur={formik.handleBlur} onChange={formik.handleChange} id="area">
                                                         <option value={0} disabled defaultValue hidden>Select Your Area</option>
-                                                        {
-                                                            areas.map((area) => (
-                                                                <option key={area.id} value={area.id}>
-                                                                    {area.name}
-                                                                </option>
-                                                            )
-                                                            )
-                                                        }
+                                                        {areas.map((area) => (
+                                                            <option key={area.id} value={area.id}>
+                                                                {area.name}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                     {formik.touched.area_id && formik.errors.area_id ? (
                                                         <div className='errorDiv'>{formik.errors.area_id}</div>
@@ -257,7 +257,7 @@ const GameReq = () => {
                                                 <div className="form-group">
                                                     <label className="h4 fw-bolder">Number of players</label>
                                                     <p className="text-muted">Put the number you need to fill your game</p>
-                                                    <input type="number" min={1} max={10} onBlur={formik.handleBlur} id="players_number" name='players_number' value={formik.values.players_number} onChange={formik.handleChange} className="form-control" placeholder="Number of players" />
+                                                    <input type="number" min={1} max={5} onBlur={formik.handleBlur} id="players_number" name='players_number' value={formik.values.players_number} onChange={formik.handleChange} className="form-control" placeholder="Number of players" />
                                                     {formik.touched.players_number && formik.errors.players_number ? (
                                                         <div className='errorDiv'>{formik.errors.players_number}</div>
                                                     ) : null}
@@ -336,7 +336,7 @@ const GameReq = () => {
 
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-warning fw-bolder" >Request</button>
+                                <button type="submit" className="btn btn-warning fw-bolder"  >Request</button>
                                 <ToastContainer />
 
                             </div>

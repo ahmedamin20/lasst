@@ -32,7 +32,7 @@ const Home = () => {
                             <div className="heading">
                                 <h2 className="my-4">Recommended <b>Venues</b></h2>
                                 <span>Explore Out Top Deals<i className='bx bx-play bx-rotate-90' style={{ color: '#0a1429' }} ></i></span>
-                                <a className="see" href="#">See All</a>
+                                <Link to="/created-games" className="see" href="#">See All</Link>
                             </div>
                             <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
                                 <div className="carousel-inner my-3 mx-3">

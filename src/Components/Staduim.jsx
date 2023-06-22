@@ -66,22 +66,22 @@ const Staduim = () => {
                         {/* Row 2 - Labels */}
                         <div className="col-md-4 my-5">
                             <div className="basic-info">
-                                <h5 className="fw-bolder my-3">AlMasa Stadium</h5>
-                                <h6>Cairo | AinShams</h6>
+                                <h5 className="fw-bolder my-3">{localStorage.getItem("stadName")}</h5>
+                                <h6>{localStorage.getItem("stadCity")} | {localStorage.getItem("stadArea")}</h6>
                                 <div className="contacts">
-                                    <li>Staduim Size : 150 M</li>
-                                    <li>Grass type : Artificial grass</li>
+                                    <li>Staduim Space : {localStorage.getItem("stadspace")} M</li>
+                                    <li>Grass type : {localStorage.getItem("stadgross_type_text")}</li>
                                     <li>
-                                        Game Type : <span>5</span> <span>Players</span>
+                                        Game Type : <span>{localStorage.getItem("stadtype_text")}</span> <span>Players</span>
                                     </li>
                                 </div>
                                 <p>
-                                    <a href="https://goo.gl/maps/SFVgLDmrnCKfWkt76">
+                                    <a href={localStorage.getItem("stadlocation")}>
                                         <i className="bx bx-map" undefined="" />
                                         Open on maps
                                     </a>
                                 </p>
-                                <div className="contacts">
+                                {/* <div className="contacts">
                                     <h5>Contacts :</h5>
                                     <li>
                                         <i className="bx bxs-phone" />
@@ -98,7 +98,7 @@ const Staduim = () => {
                                         <i className="fa fa-star rating-color" />
                                         <i className="fa fa-star" />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="social py-2">
                                     <a href="#" className="fa fa-facebook px-1" />
                                     <a

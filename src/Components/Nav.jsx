@@ -50,7 +50,7 @@ const Nav = () => {
                     <a href="#about" className="nav-item text-white nav-link">About</a>
                 </div>
                 <div className="profileContainer d-flex ms-auto order-5 mx-5">
-                    <div className="dropdown p-2">
+                    {/* <div className="dropdown p-2">
                         <a
                             className="m-2 dropdown-toggle hidden-arrow"
                             href="#"
@@ -76,7 +76,7 @@ const Nav = () => {
                                 <button className="dropdown-item" >Up comming matches</button>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     <div className="dropdown p-2">
                         <a

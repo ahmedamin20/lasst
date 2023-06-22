@@ -42,9 +42,9 @@ const JoindedList = () => {
     return (
         <div className="col-md-10 col-lg-8 col-xl-6">
 
-            <div className="card mb-3">
+            <div className="card mb-3" style={{ background: "#f3f3f3", boxShadow: "none" }}>
                 <div className="card-body p-4 my-2">
-                    {joins.map(joinItem => (
+                    {joins && joins.map(joinItem => (
                         <div className="d-flex mt-2 flex-start w-100" style={{ borderBottom: "1px solid #8080807a", padding: "1rem" }} key={joinItem.id}>
                             <img
                                 className="rounded-circle shadow-1-strong me-3"

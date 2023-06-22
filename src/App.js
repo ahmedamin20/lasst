@@ -12,7 +12,6 @@ import Welcome from './Components/Welcome';
 import SearchGames from './Components/SearchGames';
 import GameInfo from './Components/GameInfo';
 import LineUp from './Components/LineUp';
-import ErrorPage from './Components/ErrorPage';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-toastify/dist/ReactToastify.css';
 import LineUpShow from './Components/LineUpShow';

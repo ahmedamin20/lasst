@@ -3,7 +3,7 @@ import '../lineUp.css'
 import { Tooltip } from 'react-tooltip'
 import imgg from "../imags/noImg.png"
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const LineUp = () => {
     const [games, setGames] = useState([]);

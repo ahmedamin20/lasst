@@ -3,6 +3,8 @@ import Nav from './Nav'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Footer from './Footer'
+import img from "../imags/kora2.jpg"
+
 const SearchGames = () => {
     const [cityId, setCityId] = useState('');
     const [areaId, setAreaId] = useState()
@@ -65,7 +67,7 @@ const SearchGames = () => {
         setCityId(event.target.value);
     };
     return (
-        <div className='createdGames'>
+        <div className='createdGames' >
             <Nav />
             <div className="container" >
                 <div className="title">
@@ -88,9 +90,6 @@ const SearchGames = () => {
                         </select>
                     </div>
                     <div className="col">
-                        {/* <label className="text" style={{ fontWeight: 500 }}>
-                            Select Your Area
-                        </label> */}
                         <select className="form-select" id="area" value={areaId} onChange={(e) => setAreaId(e.target.value)}>
                             <option value="" selected="" disabled="" hidden="">
                                 {sessionStorage.getItem("AreaValue") || "Select Your Area"}
@@ -98,19 +97,18 @@ const SearchGames = () => {
                             {areas && areas.map((area) => (
                                 <option key={area.id} value={area.id}>{area.name}</option>
                             ))}
-
                         </select>
                     </div>
                     <button type="submit" onClick={handleSearch} className="searchGameBtn">View</button>
                 </div>
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
                     {/* Card 1 */}
-                    {SearchResults.map((item) => {
+                    {SearchResults && SearchResults.map((item) => {
                         return (
                             <div className="col text-center" key={item.id}>
                                 <div className="card game-img h-100 p-4 rounded-2">
                                     <div className="overflow-hidden rounded-2">
-                                        <img src="imags/kora2.jpg" className=" card-img-top" alt="..." />
+                                        <img src={img} className=" card-img-top" alt="..." />
                                     </div>
                                     <div className="card-body">
                                         <h4 className="card-title fw-bolder">{item.venue_name}</h4>
@@ -141,6 +139,7 @@ const SearchGames = () => {
                                             localStorage.setItem('game_id', item.id)
                                             localStorage.setItem("location", item.location)
                                             localStorage.setItem("joined_players_count", item.joined_players_count)
+                                            localStorage.setItem("CreatorName", item.user.name)
                                         }} >
                                             View
                                         </Link>
