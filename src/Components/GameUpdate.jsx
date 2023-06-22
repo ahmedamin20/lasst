@@ -22,16 +22,16 @@ const GameUpdate = () => {
 
     const formik = useFormik({
         initialValues: {
-            city_id: localStorage.getItem("gamecity"),
-            area_id: localStorage.getItem("gameArea"),
-            name: localStorage.getItem("venue_name"),
-            phone: localStorage.getItem("phone"),
-            location_url: localStorage.getItem("gameLocation"),
-            players_number: localStorage.getItem("playersNumber"),
-            price: localStorage.getItem("gamePrice"),
-            date: localStorage.getItem("gameDate"),
-            time: localStorage.getItem("gameTime"),
-            user_id: localStorage.getItem('UserId'),
+            city_id: "",
+            area_id: "",
+            name: "",
+            phone: "",
+            location_url: "",
+            players_number: "",
+            price: "",
+            date: "",
+            time: "",
+            user_id: "",
         },
         validationSchema: validationSchema,
         onSubmit: values => {
@@ -51,7 +51,8 @@ const GameUpdate = () => {
         const URL = `https://foora-go.predevsolutions.com/api/update-game/${localStorage.getItem('createdGameID')}`
         axios.put(URL, values, config)
             .then(response => {
-                window.location.reload()
+                // window.location.reload()
+                formik.resetForm()
                 console.log(message)
                 console.log(response.data)
                 toast.success(response.data.message, { position: toast.POSITION.TOP_CENTER }).then(
@@ -96,7 +97,6 @@ const GameUpdate = () => {
             console.log(error);
         }
     };
-    //--------get area----------\\
 
     return (
         <div>
@@ -111,7 +111,7 @@ const GameUpdate = () => {
                                         <label className="h4 fw-bolder">Football Yard</label>
                                         <p className="text-muted">Please fill it by yard Name</p>
                                         <input type="text" name="name"
-                                            value={formik.values.name || localStorage.getItem("venue_name")} id="name" onChange={formik.handleChange} className="form-control" placeholder="Enter stadium name..." />
+                                            value={formik.values.name} id="name" onChange={formik.handleChange} className="form-control" placeholder="" />
                                         {formik.touched.name && formik.errors.name ? (
                                             <div className='errorDiv'>{formik.errors.name}</div>
                                         ) : null}
@@ -125,7 +125,7 @@ const GameUpdate = () => {
                                         <p className="text-muted">Please select your city</p>
                                         <select className="form-control" name="city_id" onInput={(e) => selectAreas(e.target.value)}
                                             value={formik.values.city_id} onBlur={formik.handleBlur} onChange={formik.handleChange} id="city">
-                                            <option value={0} disabled defaultValue hidden>{localStorage.getItem("gamecity")}</option>
+                                            <option value={localStorage.getItem("userCityId")} disabled defaultValue hidden>{localStorage.getItem("gamecity")}</option>
                                             {
                                                 cities.map((city) => (
                                                     <option key={city.id} value={city.id}>
@@ -139,12 +139,11 @@ const GameUpdate = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-
                                     <div className="col-md-3-inline">
                                         <label className="text fw-bolder h4" style={{ fontWeight: "500" }}>Select Your Area</label>
                                         <p className="text-muted">Please select your area</p>
                                         <select className="form-select" name="area_id" value={formik.values.area_id} onChange={formik.handleChange} id="area">
-                                            <option value={0} disabled defaultValue hidden>{localStorage.getItem("gameArea")}</option>
+                                            <option value={localStorage.getItem("userAreaId")} disabled defaultValue hidden>{localStorage.getItem("game_area")}</option>
                                             {
                                                 areas.map((area) => (
                                                     <option key={area.id} value={area.id}>
@@ -259,8 +258,10 @@ const GameUpdate = () => {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" className="btn btn-warning fw-bolder">Save</button>
+                    <button type="button" className="btn btn-default fw-bolder" data-dismiss="modal" onClick={formik.resetForm()}>
+                        Close
+                    </button>
+                    <button type="submit" className="btn btn-default fw-bolder">Save</button>
                     <br />
                 </div>
 

@@ -268,8 +268,22 @@ const GetCreatedGames = () => {
                                     data-bs-target="#edit-request"
                                     data-bs-whatever=""
                                     onClick={() => {
+                                        formik.resetForm()
                                         localStorage.setItem('createdGameID', game.id)
                                         fetchGameData(localStorage.getItem('createdGameID'))
+                                        localStorage.setItem('createdGameID', game.id)
+                                        localStorage.setItem("gamePrice", game.price)
+                                        localStorage.setItem("venue_name", game.venue_name)
+                                        localStorage.setItem("playersNumber", game.players_number)
+                                        localStorage.setItem("gameTime", game.time)
+                                        localStorage.setItem("gameDate", game.date)
+                                        localStorage.setItem("phone", game.phone)
+                                        localStorage.setItem("gamecity", game.city)
+                                        localStorage.setItem("gameArea", game.area)
+                                        localStorage.setItem("gametype", game.type)
+                                        localStorage.setItem("gameLocation", game.location)
+                                        localStorage.setItem("JoindedplayersNumber", game.joined_players_count)
+                                        localStorage.setItem("creatorName", game.user.name)
                                     }}
                                 >
                                     Edit

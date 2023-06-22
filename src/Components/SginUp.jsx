@@ -150,6 +150,7 @@ const SignUp = () => {
                                                     className='rounded-circle'
                                                     src={uploadImg}
                                                     style={{ width: 130, height: 130 }}
+                                                    alt=""
                                                 />
                                             </div>
                                             <div className='d-flex justify-content-center my-3'>

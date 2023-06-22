@@ -12,19 +12,30 @@ const Profile = () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
+                }).then((profileRes) => {
+                    localStorage.setItem('username', profileRes.data.data.name)
+                    localStorage.setItem('userage', profileRes.data.data.age)
+                    localStorage.setItem('userweight', profileRes.data.data.weight)
+                    localStorage.setItem('userimg', profileRes.data.data.image)
+                    localStorage.setItem('userheight', profileRes.data.data.height)
+                    localStorage.setItem('usercity', profileRes.data.data.city)
+                    localStorage.setItem('userarea', profileRes.data.data.area)
+                    localStorage.setItem('email', profileRes.data.data.email)
+                    localStorage.setItem('phone', profileRes.data.data.phone)
+
+                    localStorage.setItem('shooting', profileRes.data.data.rates.shooting)
+                    localStorage.setItem('defending', profileRes.data.data.rates.defending)
+                    localStorage.setItem('dribbling', profileRes.data.data.rates.dribbling)
+                    localStorage.setItem('overall', profileRes.data.data.rates.overall)
+                    localStorage.setItem('pace', profileRes.data.data.rates.pace)
+                    localStorage.setItem('passing', profileRes.data.data.rates.passing)
+                    localStorage.setItem('physical', profileRes.data.data.rates.physical)
+
+                    // console.log(profileRes.data.data.rates.defending); // Handle the profileRes data
+
                 });
 
-                localStorage.setItem('username', profileRes.data.data.name)
-                localStorage.setItem('userage', profileRes.data.data.age)
-                localStorage.setItem('userweight', profileRes.data.data.weight)
-                localStorage.setItem('userimg', profileRes.data.data.image)
-                localStorage.setItem('userheight', profileRes.data.data.height)
-                localStorage.setItem('usercity', profileRes.data.data.city)
-                localStorage.setItem('userarea', profileRes.data.data.area)
-                localStorage.setItem('email', profileRes.data.data.email)
-                localStorage.setItem('phone', profileRes.data.data.phone)
-                localStorage.setItem('UserId', profileRes.data.data.id)
-                console.log(profileRes.data); // Handle the profileRes data
+
             } catch (error) {
                 console.error(error); // Handle errors
             }
@@ -41,7 +52,7 @@ const Profile = () => {
                         <div className="profile-tab-nav border-right me-4">
                             <div className="p-5 ms-0">
                                 <div>
-                                    <div className="d-flex justify-content-start ms-2">
+                                    <div className="d-flex w-100 h-100 justify-content-start ms-2">
                                         <img
                                             src={localStorage.getItem('userimg')}
                                             id="photo"
@@ -84,18 +95,7 @@ const Profile = () => {
                                             <i className="bx bxs-color" />
                                             Skills
                                         </a>
-                                        {/* <a
-                                            className="nav-link"
-                                            id="matches-tab"
-                                            data-toggle="pill"
-                                            href="#matches"
-                                            role="tab"
-                                            aria-controls="matches"
-                                            aria-selected="false"
-                                        >
-                                            <i className="bx bx-history" />
-                                            Match History
-                                        </a> */}
+
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@ const Profile = () => {
                                             <div className="card-body">
                                                 <div className="row ">
                                                     <div className="col-sm-6 col-md-9">
-                                                        <h5 className="card-title">Speed</h5>
+                                                        <h5 className="card-title">shooting</h5>
                                                     </div>
                                                     <div className="col-6 col-md-3">
                                                         <p className="card-text text-muted">
@@ -223,7 +223,7 @@ const Profile = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="card-text text-muted">89</p>
+                                                <p className="card-text text-muted">{localStorage.getItem("shooting")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +232,47 @@ const Profile = () => {
                                             <div className="card-body">
                                                 <div className="row ">
                                                     <div className="col-sm-6 col-md-9">
-                                                        <h5 className="card-title">Dribling</h5>
+                                                        <h5 className="card-title">defending</h5>
+                                                    </div>
+                                                    <div className="col-6 col-md-3">
+                                                        <p className="card-text text-muted">
+                                                            <i
+                                                                className="bx bx-run display-6"
+                                                                style={{ color: "#ff9800" }}
+                                                            />
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p className="card-text text-muted">{localStorage.getItem("defending")}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-5 mb-3 mb-sm-0 my-3">
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row ">
+                                                    <div className="col-sm-6 col-md-9">
+                                                        <h5 className="card-title">dribbling</h5>
+                                                    </div>
+                                                    <div className="col-6 col-md-3">
+                                                        <p className="card-text text-muted">
+                                                            <i
+                                                                className="bx bx-run display-6"
+                                                                style={{ color: "#ff9800" }}
+                                                            />
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p className="card-text text-muted">{localStorage.getItem("dribbling")}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-5 mb-3 mb-sm-0 my-3">
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row ">
+                                                    <div className="col-sm-6 col-md-9">
+                                                        <h5 className="card-title">Overall</h5>
                                                     </div>
                                                     <div className="col-6 col-md-3">
                                                         <p className="card-text text-muted">
@@ -243,7 +283,7 @@ const Profile = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="card-text text-muted">89</p>
+                                                <p className="card-text text-muted">{localStorage.getItem("overall")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -252,7 +292,7 @@ const Profile = () => {
                                             <div className="card-body">
                                                 <div className="row ">
                                                     <div className="col-sm-6 col-md-9">
-                                                        <h5 className="card-title">Shoot</h5>
+                                                        <h5 className="card-title">Pace</h5>
                                                     </div>
                                                     <div className="col-6 col-md-3">
                                                         <p className="card-text text-muted">
@@ -263,7 +303,7 @@ const Profile = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="card-text text-muted">89</p>
+                                                <p className="card-text text-muted">{localStorage.getItem("pace")}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +312,7 @@ const Profile = () => {
                                             <div className="card-body">
                                                 <div className="row ">
                                                     <div className="col-sm-6 col-md-9">
-                                                        <h5 className="card-title">Team</h5>
+                                                        <h5 className="card-title">Passing</h5>
                                                     </div>
                                                     <div className="col-6 col-md-3">
                                                         <p className="card-text text-muted">
@@ -283,7 +323,27 @@ const Profile = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="card-text text-muted">89</p>
+                                                <p className="card-text text-muted">{localStorage.getItem("passing")}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-5 mb-3 mb-sm-0 my-3">
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row ">
+                                                    <div className="col-sm-6 col-md-9">
+                                                        <h5 className="card-title">Physical</h5>
+                                                    </div>
+                                                    <div className="col-6 col-md-3">
+                                                        <p className="card-text text-muted">
+                                                            <i
+                                                                className="bx bxs-group display-6"
+                                                                style={{ color: "#ff9800" }}
+                                                            />
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p className="card-text text-muted">{localStorage.getItem("physical")}</p>
                                             </div>
                                         </div>
                                     </div>

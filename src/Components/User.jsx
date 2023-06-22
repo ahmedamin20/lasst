@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
 import axios from 'axios'
 import { useFormik } from 'formik';
@@ -10,6 +10,34 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const User = () => {
     const [message, setMessage] = useState();
+    //--------get cities----------\\
+    const [cities, setCities] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://foora-go.predevsolutions.com/api/get-cities');
+                setCities(response.data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
+
+
+
+    //--------get area----------\\
+    const [areas, setAreas] = useState([]);
+    const selectAreas = async (id) => {
+        try {
+            const response = await axios.get(`https://foora-go.predevsolutions.com/api/city/${id}/areas`);
+            setAreas(response.data.data);
+            console.log(areas)
+            localStorage.setItem("searchCity", id)
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const initialValues = {
         name: localStorage.getItem('username') || '',
@@ -27,6 +55,8 @@ const User = () => {
         weight: Yup.number().positive('Weight must be a positive number').required('Weight is required'),
         height: Yup.number().positive('Height must be a positive number').required('Height is required'),
         phone: Yup.string().required('Phone is required'),
+        // city: Yup.string().required('City is required'),
+        // area: Yup.string().required('Area is required'),
     });
 
     const formik = useFormik({
@@ -45,6 +75,8 @@ const User = () => {
                 weight: values.weight,
                 height: values.height,
                 phone: values.phone,
+                // city: values.city,
+                // area: values.area
             };
 
             const token = localStorage.getItem('token');
@@ -63,7 +95,7 @@ const User = () => {
             const response = await axios(config);
             const responseData = response.data;
             toast.success(responseData.message, { position: toast.POSITION.TOP_CENTER }).then(
-                window.location.reload()
+                // window.location.reload()
             )
             console.log(JSON.stringify(responseData));
         } catch (error) {
@@ -84,6 +116,7 @@ const User = () => {
 
         const formData = new FormData();
         formData.append("profile_image", file);
+
 
         fetch("https://foora-go.predevsolutions.com/api/upload-profile-image", {
             method: "POST",
@@ -180,6 +213,7 @@ const User = () => {
         }
     };
     //-----------Change Password----------\\
+
 
     return (
         <>
@@ -405,6 +439,58 @@ const User = () => {
                                                 )}
                                             </div>
                                         </div>
+                                        {/* <div className='row mb-4'>
+                                            <div className='col-md-6'>
+                                                <div className='col-md-3-inline'>
+                                                    <select
+                                                        className='form-control my-1'
+                                                        onInput={(e) => selectAreas(e.target.value)}
+                                                        value={formik.values.city}
+                                                        onChange={formik.handleChange}
+                                                        as='select'
+                                                        id='city'
+                                                        name='city'
+                                                    >
+                                                        <option value='' disabled selected defaultValue>
+                                                            {localStorage.getItem("usercity")}
+                                                        </option>
+                                                        {cities.map((city) => (
+                                                            <option key={city.id} value={city.id}>
+                                                                {city.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    {formik.errors.city && formik.touched.city && (
+                                                        <div className="errorDiv">{formik.errors.city}</div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className='col-md-6'>
+                                                <div className='col-md-3-inline'>
+                                                    <select
+                                                        className='form-control my-1'
+                                                        onChange={formik.handleChange}
+                                                        onInput={(e) => selectAreas(e.target.value)}
+                                                        as='select'
+                                                        value={formik.values.area}
+                                                        id='area'
+                                                        name='area'
+                                                    >
+                                                        <option disabled selected defaultValue>
+                                                            {localStorage.getItem("userarea")}
+                                                        </option>
+                                                        {areas.map((area) => (
+                                                            <option key={area.id} value={area.id}>
+                                                                {area.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    {formik.errors.area && formik.touched.area && (
+                                                        <div className="errorDiv">{formik.errors.area}</div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div> */}
                                     </div>
                                     <div>
                                         <button className="btn btn-primary" type="submit">Update</button>

@@ -16,8 +16,6 @@
 } */
 .profileRateImg {
   min-width: 180px !important;
-  height: 180px !important;
-  margin-top: 1rem;
 }
 
 .mainImg-S-UP {
@@ -566,7 +564,7 @@ h2::after {
 }
 .carousel .item {
   color: #003f8b;
-  min-height: 325px;
+  /* min-height: 325px; */
   text-align: center;
   overflow: hidden;
 }
@@ -590,7 +588,7 @@ h2::after {
 }
 .carousel .item img {
   min-width: 100%;
-  min-height: 100%;
+  /* min-height: 100%; */
 }
 .carousel .item h4 {
   font-size: 18px;
