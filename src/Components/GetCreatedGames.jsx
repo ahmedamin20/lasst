@@ -221,7 +221,7 @@ const GetCreatedGames = () => {
             <h3 className="mb-4 fw-bolder">Your matches history</h3>
             <p className="text-muted">Manage and edit your games requests.</p>
             <div className="row">
-                {games.map((game) => (
+                {games && games.map((game) => (
                     <div
                         className="card d-flex flex-column justify-content-center algin-item-center my-1 mx-4"
                         style={{ width: "22rem" }}
@@ -268,7 +268,6 @@ const GetCreatedGames = () => {
                                     data-bs-target="#edit-request"
                                     data-bs-whatever=""
                                     onClick={() => {
-                                        formik.resetForm()
                                         localStorage.setItem('createdGameID', game.id)
                                         fetchGameData(localStorage.getItem('createdGameID'))
                                         localStorage.setItem('createdGameID', game.id)

@@ -7,6 +7,7 @@ import GameReq from "./GameReq";
 import Footer from "./Footer";
 import VenuesSlider from "./VenuesSlider";
 import StadSlider from './StadSlider';
+import TeamSlider from "./TeamSlider";
 const Home = () => {
     return (
         <>
@@ -86,6 +87,26 @@ const Home = () => {
                                         <div className="row w-100">
                                             <div className="col-sm-3 my-3 w-100 sliderCard">
                                                 <Slider />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-14">
+                            <h2 className="my-2">Our <b>Team</b></h2>
+                            <div id="myCarousel" className="carousel slide" data-ride="carousel" data-interval="0">
+                                <div className="carousel-inner">
+                                    <div className="item w-100 active">
+                                        <div className="row w-100">
+                                            <div className="col-sm-3 my-3 w-100 sliderCard">
+                                                <TeamSlider />
                                             </div>
                                         </div>
                                     </div>

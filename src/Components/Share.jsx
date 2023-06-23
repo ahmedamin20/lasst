@@ -3,7 +3,7 @@ import React from 'react';
 const ShareButton = (props) => {
 
     const handleShare = () => {
-        const url = `whatsapp://send?text=${encodeURIComponent(props)}`;
+        const url = `whatsapp://send?text=${encodeURIComponent(props.link)}`;
         window.open(url, '_blank');
     };
 

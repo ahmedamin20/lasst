@@ -115,7 +115,7 @@ const GameInfo = () => {
                                 View Line up
                             </Link>
 
-                            <ShareButton />
+                            <ShareButton link={`https://foora-go.predevsolutions.com/api/get-specific-game/${localStorage.getItem('game_id')}`} />
                             <ToastContainer />
                         </div>
                     </div>

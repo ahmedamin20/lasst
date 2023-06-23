@@ -59,56 +59,55 @@ const PlayersJoindedGame = () => {
     return (
         <div className="row">
 
-            {player &&
-                player.map((item, index) => (
-                    <div className="row" key={item.id}>
-                        <div
-                            className="card d-block my-1 mx-4"
-                            style={{ width: '22rem', height: '24rem' }}
-                        >
-                            <img
-                                src="imags/background.jpg"
-                                className="card-img-top my-2"
-                                alt="..."
-                            />
-                            <div className="card-body fw-bolder px-1">
-                                <h6>{item.venue_name}</h6>
-                                <p className="my-1">
-                                    <i className="bx bxs-watch" style={{ color: '#0a1429' }} />{' '}
-                                    <span>{item.date}</span> <span>|</span>{' '}
-                                    <span>{item.time}</span>
-                                </p>
-                                <p className="my-1">
-                                    <i
-                                        className="bx bxs-dollar-circle"
-                                        style={{ color: '#32aa37' }}
-                                    />{' '}
-                                    {item.price}
-                                </p>
-                                <p>
-                                    <i className="bx bxs-user" style={{ color: '#0a1429' }} />{' '}
-                                    <span>{item.JoindedplayersNumber}</span>{' '}
-                                    <span>/</span> <span>{item.players_number}</span>{' '}
-                                    <span>Players</span>
-                                </p>
-                                <div className="my-3">
-                                    <a
-                                        href="#"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#cancel-joined-request"
-                                        data-bs-whatever=""
-                                        className="btn btn-danger mx-2"
-                                        onClick={() => {
-                                            handleClick(item.player.id, item.id);
-                                        }}
-                                    >
-                                        Cancel Request
-                                    </a>
-                                </div>
+            {player && player.map((item, index) => (
+                <div className="row" key={item.id}>
+                    <div
+                        className="card d-block my-1 mx-4"
+                        style={{ width: '22rem', height: '24rem' }}
+                    >
+                        <img
+                            src="imags/background.jpg"
+                            className="card-img-top my-2"
+                            alt="..."
+                        />
+                        <div className="card-body fw-bolder px-1">
+                            <h6>{item.venue_name}</h6>
+                            <p className="my-1">
+                                <i className="bx bxs-watch" style={{ color: '#0a1429' }} />{' '}
+                                <span>{item.date}</span> <span>|</span>{' '}
+                                <span>{item.time}</span>
+                            </p>
+                            <p className="my-1">
+                                <i
+                                    className="bx bxs-dollar-circle"
+                                    style={{ color: '#32aa37' }}
+                                />{' '}
+                                {item.price}
+                            </p>
+                            <p>
+                                <i className="bx bxs-user" style={{ color: '#0a1429' }} />{' '}
+                                <span>{item.JoindedplayersNumber}</span>{' '}
+                                <span>/</span> <span>{item.players_number}</span>{' '}
+                                <span>Players</span>
+                            </p>
+                            <div className="my-3">
+                                <a
+                                    href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#cancel-joined-request"
+                                    data-bs-whatever=""
+                                    className="btn btn-danger mx-2"
+                                    onClick={() => {
+                                        handleClick(item.player.id, item.id);
+                                    }}
+                                >
+                                    Cancel Request
+                                </a>
                             </div>
                         </div>
                     </div>
-                ))}
+                </div>
+            ))}
         </div>
     );
 };
