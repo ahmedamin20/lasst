@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav';
 import Footer from './Footer';
+import img from "../imags/kora2.jpg"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const AllStaduims = () => {
     const [SearchResults, setSearchResults] = useState([]);
     const [cityId, setCityId] = useState('');
@@ -39,7 +41,7 @@ const AllStaduims = () => {
 
         const requestData = {
             city_id: cityId,
-            area_id: areaId
+            area_id: areas
         };
 
         axios
@@ -103,23 +105,35 @@ const AllStaduims = () => {
                         <div className="col text-center" key={item.id}>
                             <div className="card staduim-img p-4 rounded-2">
                                 <div className="overflow-hidden rounded-2">
-                                    <img src="imags/stadium.png" className=" card-img-top" alt="" />
+                                    <img src={img} className=" card-img-top" alt="" />
                                 </div>
                                 <div className="card-body">
-                                    <h4 className="fw-bolder">{item.venue_name}</h4>
+                                    <h4 className="fw-bolder">{item.name}</h4>
                                     <h5 className="fw-bolder">{item.city} | {item.area}</h5>
                                     <p className="m-0 fw-bolder">
-                                        <i className="bx bxs-dollar-circle" style={{ color: "#32aa37" }} />{" "}
-                                        <span>{item.price}</span> EGP
+                                        <span>{item.gross_type_text}</span>
                                     </p>
-                                    <button
+                                    <p className="m-0 fw-bolder">
+                                        <span>{item.space}M</span>
+                                    </p>
+                                    <p className="m-0 fw-bolder">
+                                        <span>{item.type_text}{" "}/ Players</span>
+                                    </p>
+                                    <Link
                                         className="btn btn-outline-warning fw-bolder mt-3"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#book"
-                                        data-bs-whatever=""
+                                        to="/Staduim"
+                                        onClick={() => {
+                                            localStorage.setItem("stadName", item.name)
+                                            localStorage.setItem("stadArea", item.area)
+                                            localStorage.setItem("stadCity", item.city)
+                                            localStorage.setItem("stadgross_type_text", item.gross_type_text)
+                                            localStorage.setItem("stadtype_text", item.type_text)
+                                            localStorage.setItem("stadspace", item.space)
+                                            localStorage.setItem("stadlocation", item.location)
+                                        }}
                                     >
                                         Book Now
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +144,7 @@ const AllStaduims = () => {
 
 
 
-                <div
+                {/* <div
                     className="modal fade"
                     id="book"
                     tabIndex={-1}
@@ -242,7 +256,7 @@ const AllStaduims = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <Footer />
         </div>
